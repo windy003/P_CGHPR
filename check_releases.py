@@ -24,6 +24,9 @@ def check_single_repo(item, index, total, headers=None):
     repo_name = item.get('full_name', 'Unknown')
     repo_url = item.get('html_url', 'N/A')
     releases_url = item.get('releases_url', '')
+    created_at = item.get('created_at', 'N/A')
+    updated_at = item.get('updated_at', 'N/A')
+    pushed_at = item.get('pushed_at', 'N/A')
 
     # 去掉 {/id} 部分
     releases_api_url = releases_url.replace('{/id}', '')
@@ -45,7 +48,10 @@ def check_single_repo(item, index, total, headers=None):
                 return {
                     'name': repo_name,
                     'repo_url': repo_url,  # 仓库地址
-                    'releases_count': len(releases)
+                    'releases_count': len(releases),
+                    'created_at': created_at,
+                    'updated_at': updated_at,
+                    'pushed_at': pushed_at
                 }
             else:
                 with print_lock:
@@ -114,17 +120,23 @@ def check_repo_releases(json_file='3.json', max_workers=10, github_token=None):
 
         # 提取所有仓库的信息
         items = []
-        # 简化方案：只提取full_name和releases_url，从releases_url推导仓库URL
-        repo_pattern = r'"full_name":\s*"([^"]+)".*?"releases_url":\s*"https://api\.github\.com/repos/([^/]+/[^/]+)/releases'
+        # 提取full_name, releases_url和时间字段
+        repo_pattern = r'"full_name":\s*"([^"]+)".*?"created_at":\s*"([^"]+)".*?"updated_at":\s*"([^"]+)".*?"pushed_at":\s*"([^"]+)".*?"releases_url":\s*"https://api\.github\.com/repos/([^/]+/[^/]+)/releases'
 
         matches = re.finditer(repo_pattern, content, re.DOTALL)
         for match in matches:
             full_name = match.group(1)
-            repo_path = match.group(2)  # 格式：用户名/仓库名
+            created_at = match.group(2)
+            updated_at = match.group(3)
+            pushed_at = match.group(4)
+            repo_path = match.group(5)  # 格式：用户名/仓库名
             items.append({
                 'full_name': full_name,
                 'html_url': f'https://github.com/{repo_path}',  # 从releases_url构建
-                'releases_url': f'https://api.github.com/repos/{repo_path}/releases{{/id}}'
+                'releases_url': f'https://api.github.com/repos/{repo_path}/releases{{/id}}',
+                'created_at': created_at,
+                'updated_at': updated_at,
+                'pushed_at': pushed_at
             })
 
         if not items:
