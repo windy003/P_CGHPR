@@ -96,29 +96,9 @@ def check_repo_releases(json_file='3.json', max_workers=10, github_token=None):
     print(f"正在读取文件: {json_file}")
 
     try:
-        # 以二进制方式读取，然后解码
-        with open(json_file, 'rb') as f:
-            raw_content = f.read()
-
-        # 解码UTF-16，忽略错误
-        content = raw_content.decode('utf-16', errors='replace')
-
-        # 清理控制字符和有问题的字符
-        cleaned_chars = []
-        for char in content:
-            code = ord(char)
-            # 保留合法字符：可打印字符 + 换行/回车/制表符
-            if code >= 32 or code in (9, 10, 13):
-                # 替换问题字符为空格
-                if char == '\ufffd':  # Unicode替换字符
-                    cleaned_chars.append(' ')
-                else:
-                    cleaned_chars.append(char)
-
-        cleaned_content = ''.join(cleaned_chars)
-
-        # 尝试解析JSON
-        data = json.loads(cleaned_content)
+        # 以UTF-8方式读取JSON文件
+        with open(json_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
         print(f"✓ 成功读取JSON文件\n")
 
     except json.JSONDecodeError as e:
@@ -129,9 +109,8 @@ def check_repo_releases(json_file='3.json', max_workers=10, github_token=None):
         # 备用方案：直接用正则表达式提取需要的字段
         import re
 
-        with open(json_file, 'rb') as f:
-            raw_content = f.read()
-        content = raw_content.decode('utf-16', errors='replace')
+        with open(json_file, 'r', encoding='utf-8') as f:
+            content = f.read()
 
         # 提取所有仓库的信息
         items = []

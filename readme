@@ -1,5 +1,11 @@
-爬取到github的json文件后，重命名为3.json,然后运行check_release.py
+爬取到github的json文件后，重命名为3.json,手动改为UTF-8编码，然后运行check_release.py
 
 
 
 check_rate_limit 是查看Github token的使用情况的
+
+
+
+获取搜索结果的命令：
+curl.exe "https://api.github.com/search/repositories?q=android+explorer&per_page=100&page=1"
+
