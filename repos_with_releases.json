@@ -1,0 +1,240 @@
+{
+  "__comment": "47/100 仓库有releases",
+  "repos": [
+    {
+      "name": "ohmae/dms-explorer",
+      "repo_url": "https://github.com/ohmae/dms-explorer",
+      "releases_count": 30
+    },
+    {
+      "name": "patrykcoding/rcloneExplorer",
+      "repo_url": "https://github.com/patrykcoding/rcloneExplorer",
+      "releases_count": 30
+    },
+    {
+      "name": "d4rken-org/permission-pilot",
+      "repo_url": "https://github.com/d4rken-org/permission-pilot",
+      "releases_count": 30
+    },
+    {
+      "name": "deckerst/aves",
+      "repo_url": "https://github.com/deckerst/aves",
+      "releases_count": 30
+    },
+    {
+      "name": "MMRLApp/MMRL",
+      "repo_url": "https://github.com/MMRLApp/MMRL",
+      "releases_count": 30
+    },
+    {
+      "name": "heremaps/here-sdk-examples",
+      "repo_url": "https://github.com/heremaps/here-sdk-examples",
+      "releases_count": 30
+    },
+    {
+      "name": "com-lihaoyi/mill",
+      "repo_url": "https://github.com/com-lihaoyi/mill",
+      "releases_count": 30
+    },
+    {
+      "name": "gobitfly/eth2-beaconchain-explorer-app",
+      "repo_url": "https://github.com/gobitfly/eth2-beaconchain-explorer-app",
+      "releases_count": 25
+    },
+    {
+      "name": "Mercandj/file-android",
+      "repo_url": "https://github.com/Mercandj/file-android",
+      "releases_count": 25
+    },
+    {
+      "name": "romainguy/kotlin-explorer",
+      "repo_url": "https://github.com/romainguy/kotlin-explorer",
+      "releases_count": 24
+    },
+    {
+      "name": "huffSamuel/upnp_explorer",
+      "repo_url": "https://github.com/huffSamuel/upnp_explorer",
+      "releases_count": 23
+    },
+    {
+      "name": "AlfaazPlus/QuranApp",
+      "repo_url": "https://github.com/AlfaazPlus/QuranApp",
+      "releases_count": 22
+    },
+    {
+      "name": "PowerExplorer/PowerFileExplorer",
+      "repo_url": "https://github.com/PowerExplorer/PowerFileExplorer",
+      "releases_count": 17
+    },
+    {
+      "name": "martinmimigames/little-file-explorer",
+      "repo_url": "https://github.com/martinmimigames/little-file-explorer",
+      "releases_count": 15
+    },
+    {
+      "name": "Raival-e/Prism-File-Explorer",
+      "repo_url": "https://github.com/Raival-e/Prism-File-Explorer",
+      "releases_count": 10
+    },
+    {
+      "name": "VladThodo/behe-explorer",
+      "repo_url": "https://github.com/VladThodo/behe-explorer",
+      "releases_count": 10
+    },
+    {
+      "name": "pgp/XFiles",
+      "repo_url": "https://github.com/pgp/XFiles",
+      "releases_count": 10
+    },
+    {
+      "name": "odaridavid/Design-Pattern-Samples-App",
+      "repo_url": "https://github.com/odaridavid/Design-Pattern-Samples-App",
+      "releases_count": 8
+    },
+    {
+      "name": "calintat/explorer",
+      "repo_url": "https://github.com/calintat/explorer",
+      "releases_count": 5
+    },
+    {
+      "name": "supervons/ExploreRN",
+      "repo_url": "https://github.com/supervons/ExploreRN",
+      "releases_count": 5
+    },
+    {
+      "name": "Aldeshov/ADBFileExplorer",
+      "repo_url": "https://github.com/Aldeshov/ADBFileExplorer",
+      "releases_count": 4
+    },
+    {
+      "name": "tencentyun/iot-device-java",
+      "repo_url": "https://github.com/tencentyun/iot-device-java",
+      "releases_count": 4
+    },
+    {
+      "name": "opersys/process-explorer-app",
+      "repo_url": "https://github.com/opersys/process-explorer-app",
+      "releases_count": 4
+    },
+    {
+      "name": "MagicianGuo/Android-FileExplorerDemo",
+      "repo_url": "https://github.com/MagicianGuo/Android-FileExplorerDemo",
+      "releases_count": 3
+    },
+    {
+      "name": "xgouchet/Stanley",
+      "repo_url": "https://github.com/xgouchet/Stanley",
+      "releases_count": 3
+    },
+    {
+      "name": "NordicSemiconductor/Android-nRF-Beacon",
+      "repo_url": "https://github.com/NordicSemiconductor/Android-nRF-Beacon",
+      "releases_count": 3
+    },
+    {
+      "name": "commonsguy/cw-andexplore",
+      "repo_url": "https://github.com/commonsguy/cw-andexplore",
+      "releases_count": 3
+    },
+    {
+      "name": "gigabytedevelopers/FireFiles",
+      "repo_url": "https://github.com/gigabytedevelopers/FireFiles",
+      "releases_count": 3
+    },
+    {
+      "name": "payatu/BugBazaar",
+      "repo_url": "https://github.com/payatu/BugBazaar",
+      "releases_count": 3
+    },
+    {
+      "name": "riyhs/GameKuy-Game-Explorer-App",
+      "repo_url": "https://github.com/riyhs/GameKuy-Game-Explorer-App",
+      "releases_count": 3
+    },
+    {
+      "name": "Raival-e/File-Explorer",
+      "repo_url": "https://github.com/Raival-e/File-Explorer",
+      "releases_count": 2
+    },
+    {
+      "name": "snowdream/android-explorer",
+      "repo_url": "https://github.com/snowdream/android-explorer",
+      "releases_count": 2
+    },
+    {
+      "name": "wajahatkarim3/RoomExplorer",
+      "repo_url": "https://github.com/wajahatkarim3/RoomExplorer",
+      "releases_count": 2
+    },
+    {
+      "name": "SQUARE-RG/Fax",
+      "repo_url": "https://github.com/SQUARE-RG/Fax",
+      "releases_count": 2
+    },
+    {
+      "name": "eo/mdx",
+      "repo_url": "https://github.com/eo/mdx",
+      "releases_count": 2
+    },
+    {
+      "name": "dibakarece/AndroidFileExplorer",
+      "repo_url": "https://github.com/dibakarece/AndroidFileExplorer",
+      "releases_count": 1
+    },
+    {
+      "name": "camalot/droidexplorer",
+      "repo_url": "https://github.com/camalot/droidexplorer",
+      "releases_count": 1
+    },
+    {
+      "name": "akshay2211/Oblique",
+      "repo_url": "https://github.com/akshay2211/Oblique",
+      "releases_count": 1
+    },
+    {
+      "name": "NashLegend/LegendExplorer",
+      "repo_url": "https://github.com/NashLegend/LegendExplorer",
+      "releases_count": 1
+    },
+    {
+      "name": "tutozz/ble-spam-android",
+      "repo_url": "https://github.com/tutozz/ble-spam-android",
+      "releases_count": 1
+    },
+    {
+      "name": "GarrettBeatty/arXiv-eXplorer",
+      "repo_url": "https://github.com/GarrettBeatty/arXiv-eXplorer",
+      "releases_count": 1
+    },
+    {
+      "name": "dbrant/mandelbrot-android",
+      "repo_url": "https://github.com/dbrant/mandelbrot-android",
+      "releases_count": 1
+    },
+    {
+      "name": "Ebraheemb/RestaurantsExplorer",
+      "repo_url": "https://github.com/Ebraheemb/RestaurantsExplorer",
+      "releases_count": 1
+    },
+    {
+      "name": "lrscp/AndroidFileExplorer",
+      "repo_url": "https://github.com/lrscp/AndroidFileExplorer",
+      "releases_count": 1
+    },
+    {
+      "name": "hfeky/movies-explorer",
+      "repo_url": "https://github.com/hfeky/movies-explorer",
+      "releases_count": 1
+    },
+    {
+      "name": "sepbehroozi/es-FileExplorer-3",
+      "repo_url": "https://github.com/sepbehroozi/es-FileExplorer-3",
+      "releases_count": 1
+    },
+    {
+      "name": "cyb3r-w0lf/Dirty_Stream-Android-POC",
+      "repo_url": "https://github.com/cyb3r-w0lf/Dirty_Stream-Android-POC",
+      "releases_count": 1
+    }
+  ]
+}
