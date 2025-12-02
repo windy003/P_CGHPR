@@ -41,21 +41,24 @@ def check_single_repo(item, index, total, headers=None):
         if response.status_code == 200:
             releases = response.json()
 
-            # 检查是否有releases（不是空数组）
-            if releases and len(releases) > 0:
+            # 过滤出有assets的releases
+            releases_with_assets = [r for r in releases if r.get('assets') and len(r.get('assets', [])) > 0]
+
+            # 检查是否有包含assets的releases
+            if releases_with_assets and len(releases_with_assets) > 0:
                 with print_lock:
-                    print(f"    ✓ {repo_name} 有 {len(releases)} 个release")
+                    print(f"    ✓ {repo_name} 有 {len(releases_with_assets)} 个有assets的release")
                 return {
                     'name': repo_name,
                     'repo_url': repo_url,  # 仓库地址
-                    'releases_count': len(releases),
+                    'releases_count': len(releases_with_assets),  # 只统计有assets的release
                     'created_at': created_at,
                     'updated_at': updated_at,
                     'pushed_at': pushed_at
                 }
             else:
                 with print_lock:
-                    print(f"    ✗ {repo_name} 没有releases")
+                    print(f"    ✗ {repo_name} 没有包含assets的releases")
                 return None
         elif response.status_code == 403:
             # 检查是否是限流
