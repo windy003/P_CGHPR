@@ -3,6 +3,7 @@ import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
 import os
+import sys
 from dotenv import load_dotenv
 
 # 加载 .env 文件
@@ -24,6 +25,9 @@ def check_single_repo(item, index, total, headers=None):
     repo_name = item.get('full_name', 'Unknown')
     repo_url = item.get('html_url', 'N/A')
     releases_url = item.get('releases_url', '')
+    description = item.get('description', '')
+    language = item.get('language', '')
+    languages_url = item.get('languages_url', '')
     created_at = item.get('created_at', 'N/A')
     updated_at = item.get('updated_at', 'N/A')
     pushed_at = item.get('pushed_at', 'N/A')
@@ -51,6 +55,9 @@ def check_single_repo(item, index, total, headers=None):
                 return {
                     'name': repo_name,
                     'repo_url': repo_url,  # 仓库地址
+                    'description': description,  # 仓库描述
+                    'language': language,  # 主要编程语言
+                    'languages_url': languages_url,  # 语言API地址
                     'releases_count': len(releases_with_assets),  # 只统计有assets的release
                     'created_at': created_at,
                     'updated_at': updated_at,
@@ -123,19 +130,38 @@ def check_repo_releases(json_file='3.json', max_workers=10, github_token=None):
 
         # 提取所有仓库的信息
         items = []
-        # 提取full_name, releases_url和时间字段
-        repo_pattern = r'"full_name":\s*"([^"]+)".*?"created_at":\s*"([^"]+)".*?"updated_at":\s*"([^"]+)".*?"pushed_at":\s*"([^"]+)".*?"releases_url":\s*"https://api\.github\.com/repos/([^/]+/[^/]+)/releases'
+        # 提取full_name, description, language, languages_url, releases_url和时间字段
+        repo_pattern = r'"full_name":\s*"([^"]+)".*?"description":\s*("(?:[^"\\]|\\.)*?"|null).*?"language":\s*("(?:[^"\\]|\\.)*?"|null).*?"languages_url":\s*"([^"]+)".*?"created_at":\s*"([^"]+)".*?"updated_at":\s*"([^"]+)".*?"pushed_at":\s*"([^"]+)".*?"releases_url":\s*"https://api\.github\.com/repos/([^/]+/[^/]+)/releases'
 
         matches = re.finditer(repo_pattern, content, re.DOTALL)
         for match in matches:
             full_name = match.group(1)
-            created_at = match.group(2)
-            updated_at = match.group(3)
-            pushed_at = match.group(4)
-            repo_path = match.group(5)  # 格式：用户名/仓库名
+            description_raw = match.group(2)
+            language_raw = match.group(3)
+            languages_url = match.group(4)
+            created_at = match.group(5)
+            updated_at = match.group(6)
+            pushed_at = match.group(7)
+            repo_path = match.group(8)  # 格式：用户名/仓库名
+
+            # 处理description（去掉引号，处理null情况）
+            if description_raw == 'null':
+                description = ''
+            else:
+                description = description_raw.strip('"')
+
+            # 处理language（去掉引号，处理null情况）
+            if language_raw == 'null':
+                language = ''
+            else:
+                language = language_raw.strip('"')
+
             items.append({
                 'full_name': full_name,
                 'html_url': f'https://github.com/{repo_path}',  # 从releases_url构建
+                'description': description,
+                'language': language,
+                'languages_url': languages_url,
                 'releases_url': f'https://api.github.com/repos/{repo_path}/releases{{/id}}',
                 'created_at': created_at,
                 'updated_at': updated_at,
@@ -190,6 +216,20 @@ def check_repo_releases(json_file='3.json', max_workers=10, github_token=None):
 
 
 if __name__ == "__main__":
+    # 检查命令行参数
+    if len(sys.argv) < 2:
+        print("用法: python check_releases.py <JSON文件名>")
+        print("示例: python check_releases.py 3.json")
+        sys.exit(1)
+
+    # 获取输入文件名
+    input_file = sys.argv[1]
+
+    # 检查文件是否存在
+    if not os.path.exists(input_file):
+        print(f"错误: 文件 '{input_file}' 不存在")
+        sys.exit(1)
+
     # 获取GitHub Token
     # 方法1: 从环境变量读取（推荐）
     token = os.getenv('GITHUB_TOKEN')
@@ -212,7 +252,7 @@ if __name__ == "__main__":
 
     # 运行脚本
     # max_workers可以调整，有token后可以设置更大的值（20-30）
-    repos, total_repos = check_repo_releases('3.json', max_workers=20, github_token=token)
+    repos, total_repos = check_repo_releases(input_file, max_workers=20, github_token=token)
 
     # 保存结果到文件
     if repos:
