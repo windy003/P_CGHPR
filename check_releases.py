@@ -52,12 +52,38 @@ def check_single_repo(item, index, total, headers=None):
             if releases_with_assets and len(releases_with_assets) > 0:
                 with print_lock:
                     print(f"    ✓ {repo_name} 有 {len(releases_with_assets)} 个有assets的release")
+
+                # 获取语言信息
+                languages_data = {}
+                if languages_url:
+                    try:
+                        lang_response = requests.get(languages_url, headers=headers, timeout=10)
+                        if lang_response.status_code == 200:
+                            languages_bytes = lang_response.json()
+                            # 转换字节数为行数（假设平均每行35字节）
+                            BYTES_PER_LINE = 35
+                            for lang_name, byte_count in languages_bytes.items():
+                                line_count = round(byte_count / BYTES_PER_LINE)
+                                languages_data[lang_name] = {
+                                    'bytes': byte_count,
+                                    'lines': line_count
+                                }
+
+                            with print_lock:
+                                print(f"    语言信息:")
+                                for lang_name, data in languages_data.items():
+                                    print(f"      - {lang_name}: {data['bytes']} 字节 (~{data['lines']} 行)")
+                    except Exception as e:
+                        with print_lock:
+                            print(f"    ! 获取语言信息失败: {str(e)}")
+
                 return {
                     'name': repo_name,
                     'repo_url': repo_url,  # 仓库地址
                     'description': description,  # 仓库描述
                     'language': language,  # 主要编程语言
                     'languages_url': languages_url,  # 语言API地址
+                    'languages': languages_data,  # 语言详细信息（包含字节数和行数）
                     'releases_count': len(releases_with_assets),  # 只统计有assets的release
                     'created_at': created_at,
                     'updated_at': updated_at,
